@@ -14,11 +14,14 @@ namespace ExecutionAPI.Controllers
         }
 
         [HttpPost("Process")]
-        public IActionResult Process([FromBody] OrderRequest Request)
+        public IActionResult Process([FromBody] List<OrderRequest> Requests)
         {
-            var processor  = _factory.GetRequiredService<IExecutionProcessor>(Request.Type);
-            processor.Process(Request);
-            return Ok(Request);
+            Requests.ForEach(Request =>
+            {
+                var processor = _factory.GetRequiredService<IExecutionProcessor>(Request.Type);
+                processor.Process(Request);
+            });
+            return Ok(Requests);
         }
     }
 }
