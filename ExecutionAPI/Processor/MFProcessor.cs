@@ -6,6 +6,7 @@ namespace ExecutionAPI.Processor
     {
         void IExecutionProcessor.Process(OrderRequest Request)
         {
+            Task.Delay(100).Wait();
             Request.OrderName = "MFProcessor";
             Console.WriteLine("MFProcessor");
         }
