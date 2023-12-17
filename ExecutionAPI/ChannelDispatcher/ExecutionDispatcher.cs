@@ -1,5 +1,4 @@
-﻿
-using ExecutionAPI.Model;
+﻿using ExecutionAPI.Model;
 using ExecutionAPI.Processor;
 using System.Threading.Channels;
 
@@ -22,8 +21,8 @@ namespace ExecutionAPI.ChannelDispatcher
                 while (!_channel.Reader.Completion.IsCompleted)
                 {
                     var msg = await _channel.Reader.ReadAsync();
-                    var processor = scope.ServiceProvider.GetKeyedService<IExecutionProcessor>(msg.Type);
-                    processor.Process(msg);
+                    var processor = scope.ServiceProvider.GetKeyedService<ExecutionProcessor>(msg.Type);
+                    processor.ProcessOrder(msg);
                 }
             }
             

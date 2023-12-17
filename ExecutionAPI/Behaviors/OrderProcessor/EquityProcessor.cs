@@ -1,10 +1,10 @@
 ﻿using ExecutionAPI.Model;
 
-namespace ExecutionAPI.Processor
+namespace ExecutionAPI.Behaviors.OrderProcessor
 {
-    public class EquityProcessor : IExecutionProcessor
+    public class EquityProcessor : IProcessor
     {
-        void IExecutionProcessor.Process(OrderRequest Request)
+        public void Process(OrderRequest Request)
         {
             Task.Delay(100).Wait();
             Request.OrderName = "EquityProcessor";

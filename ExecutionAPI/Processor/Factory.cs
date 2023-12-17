@@ -9,9 +9,12 @@ namespace ExecutionAPI.Processor
         {
             _serviceProvider = serviceProvider;
         }
-        public T GetRequiredService<T>(string name)
+        public T GetRequiredService<T>(string? name = null)
         {
-            return _serviceProvider.GetKeyedService<T>(name);
+            if (!string.IsNullOrEmpty(name))
+                return _serviceProvider.GetKeyedService<T>(name);
+            else
+                return _serviceProvider.GetService<T>();
         }
     }
 }

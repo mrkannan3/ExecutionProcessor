@@ -1,4 +1,6 @@
-﻿using ExecutionAPI.ChannelDispatcher;
+﻿using ExecutionAPI.Behaviors.OrderProcessor;
+using ExecutionAPI.Behaviors.Publisher;
+using ExecutionAPI.ChannelDispatcher;
 using ExecutionAPI.Model;
 using ExecutionAPI.Processor;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,9 +13,13 @@ namespace ExecutionAPI
     {
         public static void AddExecutionDependnecies(this IServiceCollection services)
         {
-            services.AddKeyedScoped<IExecutionProcessor, EquityProcessor>("Equity");
-            services.AddKeyedScoped<IExecutionProcessor, MFProcessor>("MF");
-            services.AddSingleton(Channel.CreateUnbounded<OrderRequest>());
+            services.AddScoped<ExecutionProcessor>();
+            services.AddKeyedScoped<IProcessor, EquityProcessor>("Equity");
+            services.AddKeyedScoped<IProcessor, MFProcessor>("MF");
+            services.AddKeyedScoped<IPublisher, EventPublisher>("Event");
+            services.AddKeyedScoped<IPublisher, LogPublisher>("Log");
+            //services.AddSingleton(Channel.CreateUnbounded<OrderRequest>());
+            services.AddSingleton(Channel.CreateBounded<OrderRequest>(1));
             services.AddHostedService<ExecutionDispatcher>();
             services.AddScoped<Factory>();
         }

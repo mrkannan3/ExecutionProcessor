@@ -19,8 +19,8 @@ namespace ExecutionAPI.Controllers
         {
             Requests.ForEach(Request =>
             {
-                var processor = _factory.GetRequiredService<IExecutionProcessor>(Request.Type);
-                processor.Process(Request);
+                var processor = _factory.GetRequiredService<ExecutionProcessor>();
+                processor.ProcessOrder(Request);
             });
             return Ok(Requests);
         }
