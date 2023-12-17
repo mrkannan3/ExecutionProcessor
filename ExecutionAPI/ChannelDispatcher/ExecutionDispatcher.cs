@@ -21,7 +21,7 @@ namespace ExecutionAPI.ChannelDispatcher
                 while (!_channel.Reader.Completion.IsCompleted)
                 {
                     var msg = await _channel.Reader.ReadAsync();
-                    var processor = scope.ServiceProvider.GetKeyedService<ExecutionProcessor>(msg.Type);
+                    var processor = scope.ServiceProvider.GetService<ExecutionProcessor>();
                     processor.ProcessOrder(msg);
                 }
             }
