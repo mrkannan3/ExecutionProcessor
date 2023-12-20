@@ -4,9 +4,9 @@ namespace ExecutionAPI.Behaviors.Publisher
 {
     public class EventPublisher : IPublisher
     {
-        public void Publish(OrderRequest orderRequest)
+        public void Publish(List<Order> orders)
         {
-            orderRequest.Type += "EventPublisher";
+            orders.FirstOrDefault().OrderId += "EventPublisher";
             Console.WriteLine("EventPublisher");
         }
     }

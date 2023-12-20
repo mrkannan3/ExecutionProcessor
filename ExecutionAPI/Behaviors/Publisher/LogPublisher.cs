@@ -4,10 +4,10 @@ namespace ExecutionAPI.Behaviors.Publisher
 {
     public class LogPublisher : IPublisher
     {
-        public void Publish(OrderRequest orderRequest)
+        public void Publish(List<Order> orders)
         {
-            orderRequest.Type += "LogPublisher";
-            Console.WriteLine("LogPublisher");
+            orders.FirstOrDefault().OrderId += "LogPublisher";
+            Console.WriteLine("EventPublisher");
         }
     }
 }

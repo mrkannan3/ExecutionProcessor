@@ -4,6 +4,6 @@ namespace ExecutionAPI.Behaviors.OrderProcessor
 {
     public interface IProcessor
     {
-        public void Process(OrderRequest orderRequest);
+        public void Process(List<Order> orders) ;
     }
 }

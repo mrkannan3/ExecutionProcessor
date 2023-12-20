@@ -5,10 +5,10 @@ namespace ExecutionAPI.Behaviors.OrderProcessor
 {
     public class MFProcessor : IProcessor
     {
-        public void Process(OrderRequest Request)
+        public void Process(List<Order> orders)
         {
             Task.Delay(100).Wait();
-            Request.OrderName = "MFProcessor";
+            orders.FirstOrDefault().OrderId = "MFProcessor";
             Console.WriteLine("MFProcessor");
         }
     }

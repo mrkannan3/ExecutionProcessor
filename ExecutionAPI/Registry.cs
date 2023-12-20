@@ -1,4 +1,5 @@
 ﻿using ExecutionAPI.Behaviors.OrderProcessor;
+using ExecutionAPI.Behaviors.OrderRetriever;
 using ExecutionAPI.Behaviors.Publisher;
 using ExecutionAPI.ChannelDispatcher;
 using ExecutionAPI.Model;
@@ -14,6 +15,8 @@ namespace ExecutionAPI
         public static void AddExecutionDependnecies(this IServiceCollection services)
         {
             services.AddScoped<ExecutionProcessor>();
+            services.AddKeyedScoped<IOrderRetriever, EquityOrderRetriever>("Equity");
+            services.AddKeyedScoped<IOrderRetriever, MFOrderRetriever>("MF");
             services.AddKeyedScoped<IProcessor, EquityProcessor>("Equity");
             services.AddKeyedScoped<IProcessor, MFProcessor>("MF");
             services.AddKeyedScoped<IPublisher, EventPublisher>("Event");

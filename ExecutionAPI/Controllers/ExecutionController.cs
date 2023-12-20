@@ -17,12 +17,13 @@ namespace ExecutionAPI.Controllers
         [HttpPost("Process")]
         public IActionResult Process([FromBody] List<OrderRequest> Requests)
         {
+            var orders= new List<Order>();
             Requests.ForEach(Request =>
             {
                 var processor = _factory.GetRequiredService<ExecutionProcessor>();
-                processor.ProcessOrder(Request);
+                orders.AddRange(processor.ProcessOrder(Request));
             });
-            return Ok(Requests);
+            return Ok(orders);
         }
         [HttpPost("ProcessParallel")]
         public IActionResult ProcessParallel([FromBody] List<OrderRequest> Requests , [FromServices] Channel<OrderRequest> channel)

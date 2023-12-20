@@ -4,6 +4,6 @@ namespace ExecutionAPI.Behaviors.Publisher
 {
     public interface IPublisher
     {
-        void Publish(OrderRequest orderRequest);
+        void Publish(List<Order> orders);
     }
 }

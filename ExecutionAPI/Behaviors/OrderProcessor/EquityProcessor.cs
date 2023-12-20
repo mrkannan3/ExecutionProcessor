@@ -4,10 +4,10 @@ namespace ExecutionAPI.Behaviors.OrderProcessor
 {
     public class EquityProcessor : IProcessor
     {
-        public void Process(OrderRequest Request)
+        public void Process(List<Order> orders)
         {
             Task.Delay(100).Wait();
-            Request.OrderName = "EquityProcessor";
+            orders.FirstOrDefault().OrderId = "EquityProcessor";
             Console.WriteLine("EquityProcessor");
         }
     }
